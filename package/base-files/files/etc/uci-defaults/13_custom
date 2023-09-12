@@ -1,0 +1,31 @@
+#!/bin/sh
+
+uci -q batch << EOI
+delete network.globals.ula_prefix
+delete network.wan
+delete network.wan6
+add network switch_port
+set network.@switch_port[-1].device=switch0
+set network.@switch_port[-1].port=1
+set network.@switch_port[-1].disable=1
+add network switch_port
+set network.@switch_port[-1].device=switch0
+set network.@switch_port[-1].port=2
+set network.@switch_port[-1].disable=1
+add network switch_port
+set network.@switch_port[-1].device=switch0
+set network.@switch_port[-1].port=3
+set network.@switch_port[-1].disable=1
+add network switch_port
+set network.@switch_port[-1].device=switch0
+set network.@switch_port[-1].port=4
+set network.@switch_port[-1].disable=1
+add network switch_port
+set network.@switch_port[-1].device=switch0
+set network.@switch_port[-1].port=5
+set network.@switch_port[-1].disable=1
+commit network
+EOI
+
+exit 0
+
