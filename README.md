@@ -55,10 +55,32 @@ I tried firmwares from others routers with this and some work, so I think that a
 11. Another chime sound will happen, this means that the flashing process ended and you can close the program.
 12. After a minute, you can try to ping "192.168.1.1". If you receive response, it's all right.
 
-## How can I use that?
+## How can I use this?
 1. Connect a USB Storage with the first partition formated as EXT3 on Router's USB.
 2. Try to access SMB Share "share" in the Router.
 3. The default credencial is user "root" and password "password". (That is the same for SSH, if you need.)
 4. If you can see the files inside USB Storage, it's all right. (It's read only)
 
 PS: After flash, USB Storage usually doesn't work if was connect. If that happen, restart the router.
+
+## How can I build this?
+```bash
+# Prepare and start a container capable to build
+docker run -u $UID --name openwrt-build -v"$PWD":/app -w /app -d ubuntu:16.04 tail -f
+docker exec -u0 -ti openwrt-build bash -c "apt-get update && apt-get upgrade -y"
+docker exec -u0 -ti openwrt-build bash -c "apt-get install -y subversion build-essential libncurses5-dev zlib1g-dev gawk flex quilt libssl-dev git wget curl unzip python2.7"
+
+# Command to modify packages and some options
+docker exec -ti openwrt-build bash -c "make menuconfig"
+
+# Commands to download packages and build the images
+docker exec -ti openwrt-build bash -c "make download"
+docker exec -ti openwrt-build bash -c "make"
+
+# Path where images are generated
+ls -l bin/bin/ramips/
+
+# Command to enter in container to run commands
+docker exec -ti openwrt-build bash
+``````
+For more info, check the [old wiki](https://oldwiki.archive.openwrt.org/doc/howto/build).
