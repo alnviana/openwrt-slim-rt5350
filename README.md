@@ -59,7 +59,7 @@ I tried firmwares from others routers with this and some work, so I think that a
 1. Connect a USB Storage with the first partition formated as EXT3 on Router's USB.
 2. Try to access SMB Share "share" in the Router.
 3. The default credencial is user "root" and password "password". (That is the same for SSH, if you need.)
-4. If you can see the files inside USB Storage, it's all right. (It's read only)
+4. If you can see the files inside USB Storage, it's all right.
 
 PS: After flash, USB Storage usually doesn't work if was connect. If that happen, restart the router.
 
