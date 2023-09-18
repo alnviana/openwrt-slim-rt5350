@@ -25,6 +25,14 @@ set network.@switch_port[-1].device=switch0
 set network.@switch_port[-1].port=5
 set network.@switch_port[-1].disable=1
 commit network
+delete system.led_wifi_led
+set system.led_eth0_led=led
+set system.led_eth0_led.name=eth0
+set system.led_eth0_led.sysfs=hame:blue:system
+set system.led_eth0_led.trigger=netdev
+set system.led_eth0_led.dev=eth0
+set system.led_eth0_led.mode=rx
+commit system
 EOI
 
 exit 0
